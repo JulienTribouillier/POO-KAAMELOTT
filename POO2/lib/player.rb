@@ -13,9 +13,6 @@ class Player
 
   def gets_damage(hurt)
     @life_points = @life_points - hurt
-    if @life_points <= 0
-      puts "#{name} a été tué !"
-    end
   end
 
   def attacks(attacked_player)
@@ -25,7 +22,7 @@ class Player
     if attacked_player.life_points > 0
       print  "Il lui inflige #{damage} points de dommages !\n"
     else
-      exit
+      puts "Le joueur #{name} a été tué !"
     end
   end
 
@@ -37,7 +34,7 @@ class Player
   
 end
 
-class HumanPlayer
+class HumanPlayer < Player
   attr_accessor :name, :life_points, :weapon_level
 
   def initialize(name)
@@ -51,25 +48,7 @@ class HumanPlayer
   end
 
   def compute_damage
-    return rand(1..6) * @weapon_level
-  end
-
-  def gets_damage(hurt)
-    @life_points = @life_points - hurt
-    if @life_points <= 0
-      puts "#{name} a été tué !"
-    end
-  end
-
-  def attacks(attacked_player)
-    print "Le joueur #{@name} attaque le joueur #{attacked_player.name} ! "
-    damage = compute_damage
-    attacked_player.gets_damage(damage)
-    if attacked_player.life_points > 0
-      print  "Il lui inflige #{damage} points de dommages !\n"
-    else
-      exit
-    end
+    rand(1..6) * @weapon_level
   end
 
   def search_weapon

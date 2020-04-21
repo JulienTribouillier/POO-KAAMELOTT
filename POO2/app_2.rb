@@ -17,6 +17,7 @@ player1 = Player.new("Léodagan de Carmélide")
 player2 = Player.new("Perceval de Galles")
 ennemies = [player1, player2]
 
+
 def display_menu(user, player1, player2)
     puts"#{user.show_states}"
     puts"Que veux-tu faire #{user.name} ?"
@@ -26,6 +27,9 @@ def display_menu(user, player1, player2)
     puts"Attaquer sauvagement"
     puts"1 - Léodagan de Carmélide"
     puts"2 - Perceval de Galles"
+    puts "Voici l'état de vos adversaires :"
+    puts player1.show_states
+    puts player2.show_states
 
     enter = gets.chomp
     if enter == "c"
@@ -43,23 +47,23 @@ def display_menu(user, player1, player2)
     end
 end
 
-while user.life_points > 0 || (player1.life_points > 0 && player2.life_points > 0)
+while user.life_points > 0 && player1.life_points > 0 || player2.life_points > 0
   # Display action menu
   display_menu(user, player1, player2)
 
     
   
-  ennemies.each do |ennemy|
-        if ennemy.life_points >= 0
-            puts "MECREAAAAAAANT"
+  ennemies.each do |player|
+        if player.life_points >= 0
+            puts "MECREAAAAAAANT!!!"
             puts "Tu te fais attaquer"
-            ennemy.attacks(user)
+            player.attacks(user)
         end
     end
 end
-        puts "Partie terminée"
-        if user.life_points>0
-            puts "Bravo #{warrior}, tu viens de terrasser ces deux grosses tatas!!!"
-        else
-            puts "Tu as perdu !"
-        end
+puts "Partie terminée"
+    if user.life_points>0
+        puts "Bravo #{warrior}, tu viens de terrasser ces deux grosses tatas!!!"
+    else
+        puts "Tu as perdu !"
+    end
